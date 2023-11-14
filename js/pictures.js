@@ -13,9 +13,9 @@ const renderPhoto = (photo) => {
   return newPhoto;
 };
 
-const renderPhotos = (photos) => {
-  const fragment = document.createDocumentFragment();
+const fragment = document.createDocumentFragment();
 
+const renderPhotos = (photos) => {
   photos.forEach((photo) => {
     fragment.append(renderPhoto(photo));
   });
