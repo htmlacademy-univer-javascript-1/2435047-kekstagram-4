@@ -9,7 +9,7 @@ const renderPhoto = (photo) => {
   newPhoto.querySelector('.picture__img').src = url;
   newPhoto.querySelector('.picture__img').alt = description;
   newPhoto.querySelector('.picture__likes').textContent = likes;
-  newPhoto.querySelector('.picture__comments').textContent = comments;
+  newPhoto.querySelector('.picture__comments').textContent = comments.length;
 
   return newPhoto;
 };
@@ -18,10 +18,10 @@ const renderPhotos = (photos) => {
   const fragment = document.createDocumentFragment();
 
   photos.forEach((photo) => {
-    fragment.appendChild(renderPhoto(photo));
+    fragment.append(renderPhoto(photo));
   });
 
-  pictures.appendChild(fragment);
+  pictures.append(fragment);
 };
 
 export {renderPhotos};
