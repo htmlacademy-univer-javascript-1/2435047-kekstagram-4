@@ -70,10 +70,8 @@ const createPhoto = () => ({
   comments: commentArray
 });
 
-const photosArray = Array.from({length: PHOTO_COUNT}, createPhoto);
+const getPhoto = () => Array.from({length: PHOTO_COUNT}).map((_, index) => createPhoto(index + 1));
 
-const getPhotos = (photos) => photos;
+const photos = getPhoto();
 
-getPhotos(photosArray);
-
-export {getPhotos};
+export {photos};
