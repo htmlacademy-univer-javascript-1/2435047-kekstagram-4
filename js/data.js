@@ -1,4 +1,4 @@
-import { getRandomIdFromRange } from './util.js';
+import { getRandomInteger } from './util.js';
 
 const PHOTO_COUNT = 25;
 
@@ -42,38 +42,21 @@ const Likes = {
   MAX: 200
 };
 
-const photoId = getRandomIdFromRange(1, PHOTO_COUNT);
-const urlId = getRandomIdFromRange(1, PHOTO_COUNT);
-const getDiscription = getRandomIdFromRange(0, DESCRIPTION.length - 1);
-const getCountOfLikes = getRandomIdFromRange(Likes.MIN, Likes.MAX);
-
-const commentCount = getRandomIdFromRange(CommentCount.MIN, CommentCount.MAX);
-const commentId = getRandomIdFromRange(1, PHOTO_COUNT * CommentCount.MAX);
-const avatarId = getRandomIdFromRange(AvatarCount.MIN, AvatarCount.MAX);
-const getCommetnId = getRandomIdFromRange(0,MESSAGES_FOR_COMMENTS.length - 1);
-const getNameCommentorId = getRandomIdFromRange(0, NAME_COMMENTATOS.length - 1);
-
-const createComment = () => ({
-  id: commentId(),
-  avatar: `img/avatar-${avatarId()}.svg`,
-  message: MESSAGES_FOR_COMMENTS[getCommetnId()],
-  name: NAME_COMMENTATOS[getNameCommentorId()]
+const createComment = (id) => ({
+  id: id,
+  avatar: `img/avatar-${getRandomInteger(AvatarCount.MIN, AvatarCount.MAX)}.svg`,
+  message: MESSAGES_FOR_COMMENTS[getRandomInteger(0, MESSAGES_FOR_COMMENTS.length - 1)],
+  name: NAME_COMMENTATOS[getRandomInteger(0, NAME_COMMENTATOS.length - 1)]
 });
 
-const commentArray = Array.from({length: commentCount}, createComment());
-
-const createPhoto = () => ({
-  id: photoId(),
-  url: `photos/${urlId()}.jpg`,
-  description: DESCRIPTION[getDiscription()],
-  likes: getCountOfLikes(),
-  comments: commentArray
+const createPhoto = (id) => ({
+  id: id,
+  url: `photos/${id}.jpg`,
+  description: DESCRIPTION[getRandomInteger(0, DESCRIPTION.length - 1)],
+  likes: getRandomInteger(Likes.MIN, Likes.MAX),
+  comments: Array.from({length: getRandomInteger(CommentCount.MIN, CommentCount.MAX)}, (_, index) => createComment(index + 1))
 });
 
-const photosArray = Array.from({length: PHOTO_COUNT}, createPhoto);
+const photos = Array.from({length: PHOTO_COUNT}, (_, index) => createPhoto(index + 1));
 
-const getPhotos = (photos) => photos;
-
-getPhotos(photosArray);
-
-export {getPhotos};
+export {photos};
