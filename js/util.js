@@ -28,4 +28,4 @@ const closeOnEscKeyDown = (evt, cb) => {
 };
 
 
-export {getRandomInteger, getRandomIdFromRange, closeOnEscKeyDown};
+export {getRandomInteger, getRandomIdFromRange, closeOnEscKeyDown, isEscapeKey};
