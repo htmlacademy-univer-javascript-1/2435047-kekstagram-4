@@ -10,5 +10,4 @@ node_modules/
 npm-debug.log*
 Thumbs.db
 .vscode/
-pristine.js
-nouislider/
+
