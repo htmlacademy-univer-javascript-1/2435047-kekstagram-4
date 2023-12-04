@@ -81,7 +81,7 @@ const onHashtagInput = () => {
 
 inputHashtag.addEventListener('input', onHashtagInput);
 
-formUpload.addEventListener('submit', (evt) => {
+formUpload.addEventListener('change', (evt) => {
   evt.preventDefault();
 
   pristine.validate();
