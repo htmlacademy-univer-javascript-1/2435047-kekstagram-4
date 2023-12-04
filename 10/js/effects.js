@@ -98,16 +98,17 @@ const updateFilter = (item) => {
 };
 
 const onFilterButtonChange = (evt) => {
-  const evtHandler = evt.target.value;
-  if (evtHandler === 'none') {
+  const target = evt.target.value;
+  if (target === 'none') {
     sliderWrapper.classList.add('hidden');
     imagePreview.style.filter = 'none';
   } else {
-    sliderWrapper.classList.remove('hidden');
     imagePreview.removeAttribute('class');
-    imagePreview.classList.add(`effects__preview--${evtHandler}`);
-    slider.noUiSlider.updateOptions(Effects[evtHandler].options);
-    slider.noUiSlider.on('update', updateFilter(evtHandler));
+    sliderWrapper.classList.remove('hidden');
+    imagePreview.classList.add(`effects__preview--${target}`);
+    slider.noUiSlider.updateOptions(Effects[target].options);
+    imagePreview.style.filter = `${Effects[target].filter}`;
+    slider.noUiSlider.on('update', () => updateFilter(target));
   }
 };
 
