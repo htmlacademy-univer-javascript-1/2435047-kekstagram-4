@@ -73,7 +73,6 @@ pristine.addValidator(inputHashtag, hashtagsHandler, error, 2, false);
 const onHashtagInput = () => {
   if (pristine.validate()) {
     submitButton.disabled = true;
-    errorMessage = '';
   }
   else {
     submitButton.disabled = false;

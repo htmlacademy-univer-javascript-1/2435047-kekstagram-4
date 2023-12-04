@@ -108,7 +108,7 @@ const onFilterButtonChange = (evt) => {
     imagePreview.classList.add(`effects__preview--${target}`);
     slider.noUiSlider.updateOptions(Effects[target].options);
     imagePreview.style.filter = `${Effects[target].filter}`;
-    slider.noUiSlider.on('change', updateFilter(target));
+    slider.noUiSlider.on('update', () => updateFilter(target));
   }
 };
 
