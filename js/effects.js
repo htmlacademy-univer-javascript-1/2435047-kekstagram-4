@@ -95,7 +95,6 @@ initEffects();
 const updateFilter = (item) => {
   effectValue.value = slider.noUiSlider.get();
   imagePreview.style.filter = `${Effects[item].filter}(${effectValue.value}${Effects[item].units})`;
-  console.log(`${Effects[item].filter}(${effectValue.value}${Effects[item].units})`);
 };
 
 const onFilterButtonChange = (evt) => {
