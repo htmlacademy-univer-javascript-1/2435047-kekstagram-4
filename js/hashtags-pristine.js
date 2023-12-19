@@ -2,7 +2,7 @@ const MAX_SYMBOLS = 20;
 const MAX_HASHTAGS = 5;
 
 const formUpload = document.querySelector('.img-upload__form');
-const submitButton = document.querySelector('#upload-submit');
+const submitButton = document.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(formUpload, {
   classTo: 'img-upload__field-wrapper',
@@ -10,6 +10,10 @@ const pristine = new Pristine(formUpload, {
   errorTextTag: 'p',
   errorTextClass: 'img-upload__error'
 }, true);
+
+const buttonAdjustment = () => {
+  submitButton.disabled = !pristine.validate();
+};
 
 const inputHashtag = document.querySelector('.text__hashtags');
 
@@ -42,6 +46,10 @@ const hashtagsHandler = (value) => {
       error: 'Хэш-тег должен начинаться с символа #',
     },
     {
+      check: inputArray.some((item) => item === '#'),
+      error: 'Хеш-тег не может состоять только из символа #',
+    },
+    {
       check: inputArray.some((item, num, arr) => arr.includes(item, num + 1)),
       error: 'Хэш-теги не должны повторяться',
     },
@@ -54,7 +62,7 @@ const hashtagsHandler = (value) => {
       error: `Нельзя указать больше ${MAX_HASHTAGS} хэш-тегов`,
     },
     {
-      check: inputArray.some((item) => !/^#[a-zа-яё0-9]{1,19}$/.test(item)),
+      check: inputArray.some((item) => !/^#[A-Za-zА-Яа-яЁё0-9]{0,19}$/.test(item)),
       error: 'Хэш-тег содержит недопустимые символы',
     },
   ];
@@ -70,19 +78,14 @@ const hashtagsHandler = (value) => {
 
 pristine.addValidator(inputHashtag, hashtagsHandler, error, 2, false);
 
-const onHashtagInput = () => {
-  if (pristine.validate()) {
-    submitButton.disabled = true;
-  }
-  else {
-    submitButton.disabled = false;
-  }
-};
+const onHashtagInput = () => buttonAdjustment();
 
 inputHashtag.addEventListener('input', onHashtagInput);
 
-formUpload.addEventListener('change', (evt) => {
+formUpload.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
   pristine.validate();
 });
+
+export {inputHashtag, buttonAdjustment};

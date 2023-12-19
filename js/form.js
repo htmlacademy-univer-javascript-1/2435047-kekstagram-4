@@ -1,5 +1,7 @@
 import { isEscapeKey } from './util.js';
 import { onFilterButtonChange, effectList, sliderWrapper } from './effects.js';
+import { uploadData } from './api.js';
+import { buttonAdjustment } from './hashtags-pristine.js';
 
 const Zoom = {
   MIN: 25,
@@ -17,6 +19,9 @@ const scaleButtonBigger = body.querySelector('.scale__control--bigger');
 const scaleButtonValue = body.querySelector('.scale__control--value');
 const imagePreview = body.querySelector('.img-upload__preview img');
 const imagesEffectPreview = body.querySelectorAll('.effects__preview');
+
+const errorMessage = document.querySelector('#error').content.querySelector('.error');
+const successMessage = document.querySelector('#success').content.querySelector('.success');
 
 const closeForm = () => {
   overlay.classList.add('hidden');
@@ -62,6 +67,7 @@ const onFileUploadChange = () => {
   document.addEventListener('keydown', onCloseFormEscKeyDown);
   sliderWrapper.classList.add('hidden');
   effectList.addEventListener('change', onFilterButtonChange);
+  buttonAdjustment();
 };
 
 fileUpload.addEventListener('change', onFileUploadChange);
@@ -96,5 +102,57 @@ scaleButtonBigger.addEventListener('click', (evt) => {
     changeZoom(coefficient);
   }
 });
+
+const closePopup = () => {
+  const popup = document.querySelector('.error') || document.querySelector('.success');
+  popup.remove();
+};
+
+const onEscKeyDown = (evt) => {
+  if(isEscapeKey(evt)) {
+    closePopup();
+  }
+};
+
+const onPopupClick = (evt) => {
+  if (!evt.target.classList.contains('success__inner') && !evt.target.classList.contains('error__inner')) {
+    evt.preventDefault();
+    closePopup();
+    document.removeEventListener('keydown', onEscKeyDown);
+  }
+};
+
+const showMessage = (message) => {
+  message.addEventListener('click', onPopupClick);
+  document.body.appendChild(message);
+  document.addEventListener('keydown', onEscKeyDown, {once: true});
+};
+
+const showErrorMessage = () => {
+  const messageFragment = errorMessage.cloneNode(true);
+  showMessage(messageFragment);
+};
+
+const showSuccessMessage = () => {
+  const messageFragment = successMessage.cloneNode(true);
+  showMessage(messageFragment);
+};
+
+const onSuccess = () => {
+  closeForm();
+  showSuccessMessage();
+};
+
+const onError = () => {
+  showErrorMessage();
+  closeForm();
+};
+
+const onFromUploadSubmit = (evt) => {
+  evt.preventDefault();
+  uploadData(onSuccess, onError, 'POST', new FormData(evt.target));
+};
+
+formUpload.addEventListener('submit', onFromUploadSubmit);
 
 export { imagePreview };
