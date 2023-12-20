@@ -1,9 +1,9 @@
+const DELAY = 500;
+
 const EscKeys = {
   ESC: 'Esc',
   ESCAPE: 'Escape',
 };
-
-const DELAY = 500;
 
 const isEscapeKey = (evt) => evt.key === EscKeys.ESC || evt.key === EscKeys.ESCAPE;
 
