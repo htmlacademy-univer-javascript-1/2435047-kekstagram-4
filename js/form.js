@@ -19,7 +19,6 @@ const scaleButtonBigger = body.querySelector('.scale__control--bigger');
 const scaleButtonValue = body.querySelector('.scale__control--value');
 const imagePreview = body.querySelector('.img-upload__preview img');
 const imagesEffectPreview = body.querySelectorAll('.effects__preview');
-
 const errorMessage = document.querySelector('#error').content.querySelector('.error');
 const successMessage = document.querySelector('#success').content.querySelector('.success');
 
@@ -67,6 +66,7 @@ const onFileUploadChange = () => {
   document.addEventListener('keydown', onCloseFormEscKeyDown);
   sliderWrapper.classList.add('hidden');
   effectList.addEventListener('change', onFilterButtonChange);
+
   buttonAdjustment();
 };
 
@@ -154,5 +154,3 @@ const onFromUploadSubmit = (evt) => {
 };
 
 formUpload.addEventListener('submit', onFromUploadSubmit);
-
-export { imagePreview };

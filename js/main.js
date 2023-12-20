@@ -1,8 +1,10 @@
-import { renderPhotos } from './pictures.js';
 import  './form.js';
 import './effects.js';
 import './hashtags-pristine.js';
+import './filters.js';
+import { renderPhotos } from './pictures.js';
 import { loadData } from './api.js';
+
 
 let photos = [];
 
@@ -15,10 +17,11 @@ const onSuccess = (data) => {
 const onError = () => {
   const messageAlert = document.createElement('div');
   messageAlert.style.position = 'absolute';
+  messageAlert.style.padding = '5px';
   messageAlert.style.left = 0;
   messageAlert.style.top = 0;
   messageAlert.style.right = 0;
-  messageAlert.style.fontSize = '30px';
+  messageAlert.style.fontSize = '20px';
   messageAlert.style.backgroundColor = 'red';
   messageAlert.style.textAlign = 'center';
   messageAlert.textContent = 'Ошибка загрузки фотографий';
@@ -26,5 +29,6 @@ const onError = () => {
 };
 
 loadData(onSuccess, onError);
+
 
 export {photos};

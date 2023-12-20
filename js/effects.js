@@ -1,9 +1,8 @@
-import { imagePreview  } from './form.js';
-
 const slider = document.querySelector('.effect-level__slider');
 const sliderWrapper = document.querySelector('.effect-level');
 const effectValue = document.querySelector('.effect-level__value');
 const effectList = document.querySelector('.effects__list');
+const imagePreview = document.querySelector('.img-upload__preview img');
 
 
 const Effects = {
