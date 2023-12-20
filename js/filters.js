@@ -2,6 +2,7 @@ import { photos } from './main.js';
 import { debounce, shuffleArray } from './util.js';
 import { renderPhotos, removePhotos } from './pictures.js';
 
+
 const COUNT_OF_FILTER = 10;
 const ACTIVE_CLASS = 'img-filters__button--active';
 

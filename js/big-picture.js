@@ -1,5 +1,6 @@
 import { closeOnEscKeyDown } from './util.js';
 
+
 const COMMENTS_STEP = 5;
 
 const bigPicture = document.querySelector('.big-picture');

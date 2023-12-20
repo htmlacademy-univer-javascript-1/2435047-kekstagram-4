@@ -1,7 +1,8 @@
 import { isEscapeKey } from './util.js';
-import { onFilterButtonChange, effectList, sliderWrapper } from './effects.js';
 import { uploadData } from './api.js';
 import { buttonAdjustment } from './hashtags-pristine.js';
+import { onFilterButtonChange, effectList, sliderWrapper } from './effects.js';
+
 
 const Zoom = {
   MIN: 25,
