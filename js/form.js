@@ -146,7 +146,6 @@ const onSuccess = () => {
 
 const onError = () => {
   showErrorMessage();
-  closeForm();
 };
 
 const onFromUploadSubmit = (evt) => {
