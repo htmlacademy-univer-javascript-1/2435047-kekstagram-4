@@ -1,25 +1,11 @@
-const getRandomInteger = (min, max) => {
-  const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
-  const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
-  const result = Math.random() * (upper - lower + 1) + lower;
-
-  return Math.floor(result);
+const EscKeys = {
+  ESC: 'Esc',
+  ESCAPE: 'Escape',
 };
 
-const getRandomIdFromRange = (min, max) => {
-  const previousValues = [];
+const DELAY = 500;
 
-  return function () {
-    let currentValue = getRandomInteger(min, max);
-    while (previousValues.includes(currentValue)) {
-      currentValue = getRandomInteger(min, max);
-    }
-    previousValues.push(currentValue);
-    return currentValue;
-  };
-};
-
-const isEscapeKey = (evt) => evt.key === 'Esc' || evt.key === 'Escape';
+const isEscapeKey = (evt) => evt.key === EscKeys.ESC || evt.key === EscKeys.ESCAPE;
 
 const closeOnEscKeyDown = (evt, cb) => {
   if (isEscapeKey(evt)) {
@@ -27,5 +13,27 @@ const closeOnEscKeyDown = (evt, cb) => {
   }
 };
 
+const debounce = (cb) => {
+  let lastTimeout = null;
 
-export {getRandomInteger, getRandomIdFromRange, closeOnEscKeyDown, isEscapeKey};
+  return (...args) => {
+    if (lastTimeout) {
+      window.clearTimeout(lastTimeout);
+    }
+    lastTimeout = window.setTimeout(() => {
+      cb(...args);
+    }, DELAY);
+  };
+};
+
+const shuffleArray = (array) => {
+  for (let indexOne = array.length - 1; indexOne  > 0; indexOne--) {
+    const indexTwo = Math.floor(Math.random() * (indexOne + 1));
+    [array[indexOne], array[indexTwo]] = [array[indexTwo], array[indexOne]];
+  }
+
+  return array;
+};
+
+
+export { debounce, shuffleArray, closeOnEscKeyDown, isEscapeKey };
