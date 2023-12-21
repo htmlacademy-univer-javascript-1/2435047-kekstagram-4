@@ -11,16 +11,16 @@ const Zoom = {
 
 const body = document.querySelector('body');
 const formUpload = body.querySelector('.img-upload__form');
-const overlay = body.querySelector('.img-upload__overlay');
-const fileUpload = body.querySelector('#upload-file');
-const formUploadClose = body.querySelector('#upload-cancel');
-const scaleButtonSmaller = body.querySelector('.scale__control--smaller');
-const scaleButtonBigger = body.querySelector('.scale__control--bigger');
-const scaleButtonValue = body.querySelector('.scale__control--value');
-const imagePreview = body.querySelector('.img-upload__preview img');
-const imagesEffectPreview = body.querySelectorAll('.effects__preview');
-const errorMessage = document.querySelector('#error').content.querySelector('.error');
-const successMessage = document.querySelector('#success').content.querySelector('.success');
+const overlay = formUpload.querySelector('.img-upload__overlay');
+const fileUpload = formUpload.querySelector('#upload-file');
+const formUploadClose = formUpload.querySelector('#upload-cancel');
+const scaleButtonSmaller = formUpload.querySelector('.scale__control--smaller');
+const scaleButtonBigger = formUpload.querySelector('.scale__control--bigger');
+const scaleButtonValue = formUpload.querySelector('.scale__control--value');
+const imagePreview = formUpload.querySelector('.img-upload__preview img');
+const imagesEffectPreview = formUpload.querySelectorAll('.effects__preview');
+const errorMessage = body.querySelector('#error').content.querySelector('.error');
+const successMessage = body.querySelector('#success').content.querySelector('.success');
 
 const closeForm = () => {
   overlay.classList.add('hidden');
@@ -114,6 +114,16 @@ const onEscKeyDown = (evt) => {
   }
 };
 
+const onErrorEscapeDown = (evt) => {
+  if(isEscapeKey(evt)) {
+    document.removeEventListener('keydown', onErrorEscapeDown);
+
+    errorMessage.classList.add('hidden');
+
+    document.addEventListener('keydown', onCloseFormEscKeyDown);
+  }
+};
+
 const onPopupClick = (evt) => {
   if (!evt.target.classList.contains('success__inner') && !evt.target.classList.contains('error__inner')) {
     evt.preventDefault();
@@ -130,6 +140,11 @@ const showMessage = (message) => {
 
 const showErrorMessage = () => {
   const messageFragment = errorMessage.cloneNode(true);
+  messageFragment.classList.remove('hidden');
+
+  document.removeEventListener('keydown', onCloseFormEscKeyDown);
+  document.addEventListener('keydown', onErrorEscapeDown);
+
   showMessage(messageFragment);
 };
 
