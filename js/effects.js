@@ -61,11 +61,12 @@ const Effects = {
   }
 };
 
-const slider = document.querySelector('.effect-level__slider');
-const sliderWrapper = document.querySelector('.effect-level');
-const effectValue = document.querySelector('.effect-level__value');
-const effectList = document.querySelector('.effects__list');
-const imagePreview = document.querySelector('.img-upload__preview img');
+const uploadOverlay = document.querySelector('.img-upload__overlay');
+const slider = uploadOverlay.querySelector('.effect-level__slider');
+const sliderWrapper = uploadOverlay.querySelector('.effect-level');
+const effectValue = uploadOverlay.querySelector('.effect-level__value');
+const effectList = uploadOverlay.querySelector('.effects__list');
+const imagePreview = uploadOverlay.querySelector('.img-upload__preview img');
 
 const initEffects = () => {
   noUiSlider.create(slider, {
