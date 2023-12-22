@@ -1,11 +1,3 @@
-const uploadOverlay = document.querySelector('.img-upload__overlay');
-const slider = uploadOverlay.querySelector('.effect-level__slider');
-const sliderWrapper = uploadOverlay.querySelector('.effect-level');
-const effectValue = uploadOverlay.querySelector('.effect-level__value');
-const effectList = uploadOverlay.querySelector('.effects__list');
-const imagePreview = uploadOverlay.querySelector('.img-upload__preview img');
-
-
 const Effects = {
   chrome: {
     filter: 'grayscale',
@@ -68,6 +60,13 @@ const Effects = {
     }
   }
 };
+
+const uploadOverlay = document.querySelector('.img-upload__overlay');
+const slider = uploadOverlay.querySelector('.effect-level__slider');
+const sliderWrapper = uploadOverlay.querySelector('.effect-level');
+const effectValue = uploadOverlay.querySelector('.effect-level__value');
+const effectList = uploadOverlay.querySelector('.effects__list');
+const imagePreview = uploadOverlay.querySelector('.img-upload__preview img');
 
 const initEffects = () => {
   noUiSlider.create(slider, {
